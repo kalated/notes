@@ -52,7 +52,7 @@ gitbook -V
 gitbook build www www/newbook
 ```
 
-这样纯 html 的电子书已经完成了，但是页面内的图片无法显示。
+这样纯 html 的电子书就生成在 newbook 文件夹内了，但是页面内的图片无法显示。
 
 ### 第五步：下载和使用 grepWin
 
