@@ -4,7 +4,7 @@ description: 零基础起步，高手请离开。
 
 # 使用gitbook导出HTML网站
 
-## 需求解析
+### 需求解析
 
 纯静态网站（导出后放在自己的服务器上），笔记，电子书。
 
@@ -30,17 +30,35 @@ description: 零基础起步，高手请离开。
 
 打开 cmd，执行以下命令。
 
-`npm install gitbook-cli -g`
+```text
+npm install gitbook-cli -g
+```
 
 等待足够的时间，再执行
 
+```text
 gitbook -V
+```
 
-第四步：
+第四步：从 Github 下载zip
 
-安装必要软件
+使用 clone or download 按钮，下载ZIP文件到电脑上，并将其解压到 F 盘的 www 文件夹内。同时在 www 里建立一个名为 newbook 文件夹。
 
+在 cmd 里执行以下命令：
 
+```text
+gitbook build www www/newbook
+```
 
+这样纯 html 的电子书已经完成了，但是页面内的图片无法显示。
 
+### 第五步：下载和使用 grepWin
+
+Gitbook 自动生成了 .gitbook/assets 来存放图片，而以 . 开头的文件夹在一般 web 环境里是不显示的，所以图片会有 403 错误。譬如把 .gitbook 改为 **source**。
+
+ 使用 grepWin 可以批量把 HTML 文件内的 .gitbook/assets 替换成 **source**/assets。
+
+### 第六步：上传
+
+将 html 文件上传到网站目录下，就可以访问了。  🙉 
 
