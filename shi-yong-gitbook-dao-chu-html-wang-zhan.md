@@ -12,11 +12,13 @@ description: 零基础起步，高手请离开。
 
 ### 第一步：github上的操作
 
-创建github账户，并新建一个仓库（不需要放任何内容）
+创建github账户，并新建一个仓库，避免命名 book001（不需要放任何内容）
 
 ### 第二步：gitbook上操作
 
 创建gitbook账户（使用github账号关联），接着创建一个space，可以尝试添加一些内容（至少上传一张图片）。这样在线的book就完成了。
+
+点击 Integrations ，打开 Github 开关，将电子书同步导入到 github 的新建仓库book001中。
 
 > 注意：gitbook和github不是一个网站，它们是相对独立的。
 
@@ -40,7 +42,7 @@ npm install gitbook-cli -g
 gitbook -V
 ```
 
-第四步：从 Github 下载zip
+### 第四步：从 Github 下载zip
 
 使用 clone or download 按钮，下载ZIP文件到电脑上，并将其解压到 F 盘的 www 文件夹内。同时在 www 里建立一个名为 newbook 文件夹。
 
