@@ -4,6 +4,8 @@ description: GCP Centos 8 安装 v2ray，实验成功记录
 
 # WebSocket + TLS + Web
 
+**建议：先安装 BBR**
+
 1，使用腾讯云解析绑定域名 vpn.mydoain.com 到IP地址：10.10.10.20
 
 2，使用腾讯云申请免费SSL证书，申请后下载到电脑上。
