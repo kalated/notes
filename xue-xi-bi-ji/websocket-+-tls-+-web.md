@@ -4,7 +4,7 @@ description: GCP Centos 8 安装 v2ray，实验成功记录
 
 # WebSocket + TLS + Web
 
-**建议：先安装 BBR**
+**强烈建议：SSH登录VPS后，使用打开端口命令，先把22端口永久打开，否则在安装BBR后重启VM，将有可能无法登录SSH了，VPS就变砖就没法玩了。**
 
 1，使用腾讯云解析绑定域名 vpn.mydoain.com 到IP地址：10.10.10.20
 
