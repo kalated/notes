@@ -174,4 +174,6 @@ path 路径 \# /ray
 > IPHONE需要先登录国外账号才能搜索下载APP，91VPN亲测可用。
 >
 > 参考教程： [https://www.4spaces.org/digitalocean-build-v2ray-0-1/](https://www.4spaces.org/digitalocean-build-v2ray-0-1/) [https://www.v2ray.com/](https://www.v2ray.com/)
+>
+> 重要参考：[https://guide.v2fly.org/advanced/wss\_and\_web.html](https://guide.v2fly.org/advanced/wss_and_web.html)
 
