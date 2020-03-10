@@ -4,10 +4,16 @@ description: GCP Centos 8 安装 v2ray，实验成功记录
 
 # WebSocket + TLS + Web
 
+**很奇怪，把 /ray 改为了 /rpay ，重启VPS才行。**
+
 **强烈建议：SSH登录VPS后，使用打开端口命令，先把22端口永久打开，否则在安装BBR后重启VM，将有可能无法登录SSH了，VPS就变砖就没法玩了。**
 
 ```text
 systemctl start firewalld && firewall-cmd --zone=public --add-port=22/tcp --permanent && firewall-cmd --reload
+```
+
+```text
+setsebool -P httpd_can_network_connect 1
 ```
 
 1，使用腾讯云解析绑定域名 vpn.mydoain.com 到IP地址：10.10.10.20
