@@ -49,6 +49,11 @@ gitbook -V
 在 cmd 里执行以下命令：
 
 ```text
+切换到F盘下：
+F：
+```
+
+```text
 gitbook build www www/newbook
 ```
 
