@@ -4,6 +4,8 @@ description: 适用CENTOS系统
 
 # V2ray常规安装
 
+操作几遍后，发现真的不难弄，前后只要10分钟就可以了。目前来看香港节点的访问速度很好，YOUTUBE无压力。
+
 ```text
 ##安装WGET
 yum install wget -y
@@ -34,6 +36,8 @@ cat /etc/v2ray/config.json
 ## 开启端口(26947为演示，请改为自己的)
 systemctl start firewalld && firewall-cmd --zone=public --add-port=26947/tcp --permanent && firewall-cmd --reload
 
-## 电脑上下载V2RAYN应用程序配置好即可。
+## 电脑上下载V2RAYN应用程序123根据实际情况填写，其它的和图片一致即可。
 ```
+
+![](../.gitbook/assets/image%20%284%29.png)
 
