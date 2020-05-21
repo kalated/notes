@@ -26,7 +26,13 @@ description: 'https://blog.csdn.net/datadev_sh/article/details/79593360'
 
 ![](../.gitbook/assets/20180317163239877.png)
 
-连上之后，输入命令 `sudo -i` 切换到root用户. 
+连上之后，输入命令
+
+```text
+sudo -i
+```
+
+切换到root用户. 
 
 原文链接：[https://blog.csdn.net/datadev\_sh/article/details/79593360](https://blog.csdn.net/datadev_sh/article/details/79593360)
 
