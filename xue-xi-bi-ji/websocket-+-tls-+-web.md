@@ -19,6 +19,16 @@ systemctl start firewalld && firewall-cmd --zone=public --add-port=22/tcp --perm
 ```
 
 ```text
+systemctl start firewalld && firewall-cmd --zone=public --add-port=443/tcp --permanent && firewall-cmd --reload
+```
+
+以下均以10000端口号为例子，需要将所有10000号改为自己的
+
+```text
+systemctl start firewalld && firewall-cmd --zone=public --add-port=10000/tcp --permanent && firewall-cmd --reload
+```
+
+```text
 setsebool -P httpd_can_network_connect 1
 ```
 
@@ -139,7 +149,7 @@ vi /etc/v2ray/config.json
 }
 ```
 
-以上应该要修改证书路径，网站地址，和10000端口。
+以上应该要修改证书路径，网站地址，和**10000**端口。
 
 10，客户端配置
 
@@ -147,20 +157,18 @@ vi /etc/v2ray/config.json
 
 11，注意事项：
 
-A，如何开启15254端口 ，不清楚情况下，把443也操作一下。代码如下：
+A，然后在GCP的防火墙里，把这些端口也打开。
 
-```text
-systemctl start firewalld
-firewall-cmd --zone=public --add-port=15254/tcp --permanent
-firewall-cmd --reload
-```
-
-B，然后在GCP的防火墙里，把这些端口也打开。
-
-C，Nginx修改后，需要重启 Nginx
+B，Nginx修改后，需要重启 Nginx
 
 ```text
 /etc/init.d/nginx restart
+```
+
+C，不重启VM的情况，需要执行以下命令重启 V2RAY
+
+```text
+systemctl restart v2ray
 ```
 
 D，再次重复特别注意的内容。
