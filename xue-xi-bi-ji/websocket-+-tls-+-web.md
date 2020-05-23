@@ -4,9 +4,11 @@ description: GCP Centos 8 安装 v2ray，实验成功记录
 
 # WebSocket + TLS + Web
 
-**很奇怪，把 /ray 改为了 /rpay ，重启VPS才行。**
-
 **强烈建议：SSH登录VPS后，使用打开端口命令，先把22端口永久打开，否则在安装BBR后重启VM，将有可能无法登录SSH了，VPS就变砖就没法玩了。**
+
+```text
+sudo -i
+```
 
 ```text
 systemctl start firewalld && firewall-cmd --zone=public --add-port=22/tcp --permanent && firewall-cmd --reload
@@ -14,6 +16,22 @@ systemctl start firewalld && firewall-cmd --zone=public --add-port=22/tcp --perm
 
 ```text
 setsebool -P httpd_can_network_connect 1
+```
+
+```text
+yum install wget -y && yum install tar
+```
+
+```text
+BBR加速，参考网址 https://ssr.tools/1217
+
+wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh && chmod +x tcp.sh && ./tcp.sh
+
+选择 2 进行安装，等待重启，然后执行以下
+
+./tcp.sh
+
+选择 7 进行安装，完成BBR加速安装。
 ```
 
 1，使用腾讯云解析绑定域名 vpn.mydoain.com 到IP地址：10.10.10.20
@@ -152,18 +170,6 @@ C，Nginx修改后，需要重启 Nginx
 ```
 
 D，BBR安装
-
-```text
-BBR加速，参考网址 https://ssr.tools/1217
-
-wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh && chmod +x tcp.sh && ./tcp.sh
-
-选择 2 进行安装，等待重启，然后执行以下
-
-./tcp.sh
-
-选择 7 进行安装，完成BBR加速安装。
-```
 
 E，再次重复特别注意的内容。
 
