@@ -22,15 +22,21 @@ setsebool -P httpd_can_network_connect 1
 yum install wget -y && yum install tar
 ```
 
+BBR加速，参考网址 [https://ssr.tools/1217](https://ssr.tools/1217)
+
 ```text
-BBR加速，参考网址 https://ssr.tools/1217
-
 wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh && chmod +x tcp.sh && ./tcp.sh
+```
 
+```text
 选择 2 进行安装，等待重启，然后执行以下
+```
 
+```text
 ./tcp.sh
+```
 
+```text
 选择 7 进行安装，完成BBR加速安装。
 ```
 
