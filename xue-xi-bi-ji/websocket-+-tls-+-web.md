@@ -22,37 +22,13 @@ setsebool -P httpd_can_network_connect 1
 yum install wget -y && yum install tar
 ```
 
-BBR加速，参考网址 [https://ssr.tools/1217](https://ssr.tools/1217)
+GCP默认已安装BBR加速，
 
 ```text
-wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh && chmod +x tcp.sh && ./tcp.sh
+uname -r
 ```
 
-```text
-选择 2 进行安装，等待重启，然后执行以下
-```
-
-```text
-./tcp.sh
-```
-
-```text
-选择 7 进行安装，完成BBR加速安装。
-```
-
-1，使用腾讯云解析绑定域名 vpn.mydoain.com 到IP地址：10.10.10.20
-
-2，使用腾讯云申请免费SSL证书，申请后下载到电脑上。
-
-3，将 .crt 和 .key 上传到 vps 上，copy 到指定位置，以后更新就可以直接更新这里的就好。
-
-4，使用LNMP一键安装，仅安装 nginx
-
-切换root
-
-```text
-sudo -i
-```
+使用LNMP一键安装，仅安装 nginx
 
 ```text
 wget http://soft.vpser.net/lnmp/lnmp1.6-full.tar.gz -cO lnmp1.6-full.tar.gz && tar zxf lnmp1.6-full.tar.gz && cd lnmp1.6-full && ./install.sh nginx
