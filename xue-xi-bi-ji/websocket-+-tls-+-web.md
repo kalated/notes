@@ -183,6 +183,8 @@ path 路径 \# /ray
 证书是否过期
 {% endhint %}
 
+![CLOUDFLARE&#x53EA;&#x80FD;&#x4F7F;&#x7528;DNS ONLY&#xFF1F;&#x5426;&#x5219;&#x624B;&#x673A;&#x65E0;&#x6CD5;&#x4F7F;&#x7528;](../.gitbook/assets/image%20%285%29.png)
+
 > 最后，客户端设置。
 >
 > [https://github.com/2dust/v2rayN/releases](https://github.com/2dust/v2rayN/releases) 下载v2rayN.zip
