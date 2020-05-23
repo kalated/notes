@@ -6,9 +6,13 @@ description: GCP Centos 8 安装 v2ray，实验成功记录
 
 **强烈建议：SSH登录VPS后，使用打开端口命令，先把22端口永久打开，否则在安装BBR后重启VM，将有可能无法登录SSH了，VPS就变砖就没法玩了。**
 
+1，切换root，后续重启后也需要执行
+
 ```text
 sudo -i
 ```
+
+2，开启22端口（重要）
 
 ```text
 systemctl start firewalld && firewall-cmd --zone=public --add-port=22/tcp --permanent && firewall-cmd --reload
@@ -18,47 +22,97 @@ systemctl start firewalld && firewall-cmd --zone=public --add-port=22/tcp --perm
 setsebool -P httpd_can_network_connect 1
 ```
 
+3，安装常用命令
+
 ```text
-yum install wget -y && yum install tar
+yum install wget -y && yum install tar && yum install -y zip unzip
 ```
 
-GCP默认已安装BBR加速，
+4，GCP默认已安装BBR加速，用以下命令执行查看
 
 ```text
 uname -r
 ```
 
-使用LNMP一键安装，仅安装 nginx
+5，使用LNMP一键安装，仅安装 nginx
 
 ```text
 wget http://soft.vpser.net/lnmp/lnmp1.6-full.tar.gz -cO lnmp1.6-full.tar.gz && tar zxf lnmp1.6-full.tar.gz && cd lnmp1.6-full && ./install.sh nginx
 ```
 
-5，lnmp vhost add 添加虚拟主机，安装SSL证书时，输入刚刚证书放置的位置。
-
-6，安装 v2ray 
+6，添加虚拟主机
 
 ```text
-wget https://install.direct/go.sh
-yum install -y zip unzip && bash go.sh && systemctl start v2ray
-
-## 开机自启
-systemctl enable v2ray
+lnmp vhost add
 ```
 
-7，编辑 v2ray 的设置
+安装SSL证书时，输入 2 选择 let's encrypt。
+
+7，编辑网站的 conf 文件
+
+```text
+vi /usr/local/nginx/conf/vhost/vpn.mydomain.com.conf
+cat /usr/local/nginx/conf/vhost/vpn.mydomain.com.conf
+/etc/init.d/nginx restart
+```
+
+使用VI命名后，把原有代码注释掉，修改下方的相关参数（4个地方），再COPY进去。
+
+```text
+server {
+  listen 443 ssl;
+  listen [::]:443 ssl;
+  
+  ssl_certificate       /etc/v2ray/v2ray.crt;
+  ssl_certificate_key   /etc/v2ray/v2ray.key;
+  # 1. 这里需要修改。
+  ssl_session_timeout 1d;
+  ssl_session_cache shared:MozSSL:10m;
+  ssl_session_tickets off;
+  
+  ssl_protocols         TLSv1.2 TLSv1.3;
+  ssl_ciphers           ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+  ssl_prefer_server_ciphers off;
+  
+  server_name           mydomain.me; # 2. 这里需要修改。
+    location /ray { # 3. 与 V2Ray 配置中的 path 保持一致
+      if ($http_upgrade != "websocket") { 
+          return 404;
+      }
+      proxy_redirect off;
+      proxy_pass http://127.0.0.1:10000; # 4. 假设WebSocket监听在环回地址的10000端口上
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header Host $host;
+      # Show real IP in v2ray access.log
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
+
+8，安装 v2ray 
+
+```text
+wget https://install.direct/go.sh && bash go.sh && systemctl start v2ray && systemctl enable v2ray
+```
+
+9，编辑 v2ray 的设置
 
 ```text
 cat /etc/v2ray/config.json
 vi /etc/v2ray/config.json
 ```
 
+修改以下 3 处，并替换
+
 ```text
 {
   "inbounds": [
     {
       "port": 10000, //这个端口是假设的，自己设置，但要统一。
-      "listen":"127.0.0.1",//只监听 127.0.0.1，避免除本机外的机器探测到开放了 10000 端口
+      "listen":"127.0.0.1",
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -85,55 +139,13 @@ vi /etc/v2ray/config.json
 }
 ```
 
-8，编辑网站的 conf 文件
-
-```text
-server {
-  listen 443 ssl;
-  listen [::]:443 ssl;
-  
-  ssl_certificate       /etc/v2ray/v2ray.crt;
-  ssl_certificate_key   /etc/v2ray/v2ray.key;
-  # 这个路径在3里讲过，5里输入操作过。
-  ssl_session_timeout 1d;
-  ssl_session_cache shared:MozSSL:10m;
-  ssl_session_tickets off;
-  
-  ssl_protocols         TLSv1.2 TLSv1.3;
-  ssl_ciphers           ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
-  ssl_prefer_server_ciphers off;
-  
-  server_name           mydomain.me;
-    location /ray { # 与 V2Ray 配置中的 path 保持一致
-      if ($http_upgrade != "websocket") { # WebSocket协商失败时返回404
-          return 404;
-      }
-      proxy_redirect off;
-      proxy_pass http://127.0.0.1:10000; # 假设WebSocket监听在环回地址的10000端口上
-      proxy_http_version 1.1;
-      proxy_set_header Upgrade $http_upgrade;
-      proxy_set_header Connection "upgrade";
-      proxy_set_header Host $host;
-      # Show real IP in v2ray access.log
-      proxy_set_header X-Real-IP $remote_addr;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
-}
-```
-
-```text
-vi /usr/local/nginx/conf/vhost/vpn.mydomain.com.conf
-cat /usr/local/nginx/conf/vhost/vpn.mydomain.com.conf
-/etc/init.d/nginx restart
-```
-
 以上应该要修改证书路径，网站地址，和10000端口。
 
-9，客户端配置
+10，客户端配置
 
 使用 v2rayN 添加即可，注意网址是网址，端口是443，network，路径，tls要启用。
 
-10，注意事项：
+11，注意事项：
 
 A，如何开启15254端口 ，不清楚情况下，把443也操作一下。代码如下：
 
@@ -151,9 +163,7 @@ C，Nginx修改后，需要重启 Nginx
 /etc/init.d/nginx restart
 ```
 
-D，BBR安装
-
-E，再次重复特别注意的内容。
+D，再次重复特别注意的内容。
 
 {% hint style="warning" %}
 端口 \#VPS和防火墙开启
