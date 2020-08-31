@@ -52,7 +52,8 @@ vi /usr/local/etc/v2ray/config.json
 {
   "inbounds": [
     {
-      "port": 443, // 服务器端口
+      "port": 443, 
+      "listen": "127.0.0.1",
       "protocol": "vmess",    
       "settings": {
         "clients": [
