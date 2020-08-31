@@ -46,7 +46,7 @@ bash install-release.sh --remove
 vi /usr/local/etc/v2ray/config.json
 ```
 
-配置文件内容：
+配置文件内容（**需将UUID改一下**）：
 
 ```text
 {
@@ -98,13 +98,13 @@ curl https://get.acme.sh | sh
 source ~/.bashrc
 ```
 
-10:申请证书：
+10:申请证书（**需将域名改为:xxx.xxx.com**）：
 
 ```text
 bash ~/.acme.sh/acme.sh --issue -d 域名 --alpn -k ec-256
 ```
 
-11:安装证书：
+11:安装证书（**需将域名改为:xxx.xxx.com**）：
 
 ```text
 mkdir /etc/v2ray && sudo ~/.acme.sh/acme.sh --installcert -d 域名 --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc
