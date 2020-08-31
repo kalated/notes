@@ -1,5 +1,7 @@
 # 2020最新版V2fly ws+tls+官方搭建教程
 
+> 购买VPS后，获取IP，添加域名A记录：xxx.xxx.com
+
 1: 时间同步： Centos系统
 
 ```text
