@@ -10,13 +10,16 @@
 
 **服务器端**
 
+**centos系统4合一执行即可**
+
 ```text
 systemctl start firewalld && firewall-cmd --zone=public --add-port=22/tcp --permanent && firewall-cmd --reload
 systemctl start firewalld && firewall-cmd --zone=public --add-port=443/tcp --permanent && firewall-cmd --reload
+yum install -y git && yum install -y wget
+wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/dev/install.sh" && chmod +x install.sh && bash install.sh
 ```
 
 ```text
-yum install -y git && yum install -y wget #CentOS安装命令
 apt install -y git #Debian安装命令
 ```
 
