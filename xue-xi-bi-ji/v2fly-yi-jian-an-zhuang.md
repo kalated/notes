@@ -16,8 +16,7 @@ systemctl start firewalld && firewall-cmd --zone=public --add-port=443/tcp --per
 ```
 
 ```text
-yum install -y git #CentOS安装命令
-yum install -y wget #CentOS安装命令
+yum install -y git && yum install -y wget #CentOS安装命令
 apt install -y git #Debian安装命令
 ```
 
