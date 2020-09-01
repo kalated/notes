@@ -11,6 +11,11 @@
 **服务器端**
 
 ```text
+systemctl start firewalld && firewall-cmd --zone=public --add-port=22/tcp --permanent && firewall-cmd --reload
+systemctl start firewalld && firewall-cmd --zone=public --add-port=443/tcp --permanent && firewall-cmd --reload
+```
+
+```text
 yum install -y git #CentOS安装命令
 apt install -y git #Debian安装命令
 ```
