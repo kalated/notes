@@ -30,7 +30,7 @@ wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.c
 查看配置信息
 
 ```text
-cat 
+cat v2ray_info.inf
 ```
 
 **客户端**
