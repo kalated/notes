@@ -27,8 +27,9 @@ wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.c
 
 ![](../.gitbook/assets/222.png)
 
+查看配置信息
+
 ```text
-查看信息
 cat 
 ```
 
