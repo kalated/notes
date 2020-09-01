@@ -6,7 +6,7 @@
 
 2，电脑上装好Xshell 软件，（终端编码设置为：Unicode\(UTF-8\)）
 
-3，使用Xshell 远程登录VPS
+3，使用Xshell 远程登录VPS（如果使用的是GCP，请参考[https://yunbotao.gitbook.io/notes/xue-xi-bi-ji/yong-ssh-gong-ju-xshell-lian-jie-gu-ge-yun-root-yong-hu-huo-pu-tong-yong-hu](https://yunbotao.gitbook.io/notes/xue-xi-bi-ji/yong-ssh-gong-ju-xshell-lian-jie-gu-ge-yun-root-yong-hu-huo-pu-tong-yong-hu)）
 
 **服务器端**
 
@@ -17,6 +17,7 @@ systemctl start firewalld && firewall-cmd --zone=public --add-port=443/tcp --per
 
 ```text
 yum install -y git #CentOS安装命令
+yum install -y wget #CentOS安装命令
 apt install -y git #Debian安装命令
 ```
 
@@ -25,6 +26,11 @@ wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.c
 ```
 
 ![](../.gitbook/assets/222.png)
+
+```text
+查看信息
+cat 
+```
 
 **客户端**
 
