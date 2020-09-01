@@ -19,6 +19,8 @@ apt install -y git #Debian安装命令
 wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/dev/install.sh" && chmod +x install.sh && bash install.sh
 ```
 
+![](../.gitbook/assets/222.png)
+
 **客户端**
 
 1，解压v2rayN.zip和v2ray-windows-64.zip
@@ -26,6 +28,8 @@ wget -N --no-check-certificate -q -O install.sh "https://raw.githubusercontent.c
 2，将v2ray-windows-64里的内容复制粘贴替换到v2rayN里
 
 3，点击v2rayN.exe启动客户端
+
+![](../.gitbook/assets/ke-hu-duan-pei-zhi-.jpg)
 
 **下载链接和教程参考**
 
